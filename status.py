@@ -2,7 +2,20 @@
 from time import sleep
 from sense_hat import SenseHat
 import requests
+import thread
+
 sense = SenseHat()
+
+def animate():
+    ""
+    while True:
+        if status == "happy":
+            happy()
+        elif status == "medium":
+            medium()
+        elif status == "sad":
+            sad()
+    time.sleep(0.01)
 
 def happy():
     sense.clear((0,10,0))
@@ -16,6 +29,7 @@ def happy():
     sense.set_pixel(5, 5, (255, 0, 0))
 
 def medium():
+
     sense.clear((0,10,0))
     sense.set_pixel(2, 2, (0, 0, 255))
     sense.set_pixel(4, 2, (0, 0, 255))
@@ -40,6 +54,9 @@ def sad():
 
 sense.set_rotation(180)
 
+thread.start_new_thread(animate)
+status = "medium"
+
 while True:
     sense.set_pixel(0, 0, (0, 0, 128))
     r = requests.get('https://app-r.referens.sys.kth.se/lms-monitor-of-monitor/api')
@@ -50,9 +67,9 @@ while True:
     else:
         json = r.json()
         if any(part.get('color') == 'red' for part in json):
-            sad()
+            status = "sad"
         elif all(part.get('color') == 'blue' for part in json):
-            happy()
+            status = "happy"
         else:
-            medium()
+            status = "medium"
     sleep(1.0)
