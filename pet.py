@@ -34,9 +34,16 @@ pet_stance2 = [
   bla, bla, blu, blu, blu, blu, bla, bla
   ]
 
+def walking():
+	for i in range(10):
+		sense.set_pixels(pet_stance1)
+		time.sleep(0.5)
+		sense.set_pixels(pet_stance2)
+		time.sleep(0.5)
+
+x, y, z = sense.get_accelerometer_raw().values()
+while x<2 and y<2 and z<2:
+	x, y, z = sense.get_accelerometer_raw().values()
+
 sense.clear()
-for i in range(10):
-	sense.set_pixels(pet_stance1)
-	time.sleep(0.5)
-	sense.set_pixels(pet_stance2)
-	time.sleep(0.5)
+walking()
