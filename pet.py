@@ -9,7 +9,7 @@ bla = (0, 0, 0)
 ora = (100, 62, 0)
 gra = (76, 76, 78)
 bro = (72, 30, 17)
-blu = (10, 17, 255)
+blu = (10, 17, 128)
 pur = (54, 10, 33)
 
 pet_stance1 = [
@@ -24,14 +24,19 @@ pet_stance1 = [
   ]
   
 pet_stance2 = [
+  bla, red, red, red, whi, gra, bla, bla,
+  red, red, red, whi, whi, bla, gra, bla,
+  bla, pur, pur, whi, whi, bla, gra, bla,
   bla, red, red, whi, whi, whi, gra, bla,
-  red, red, whi, whi, bla, whi, bla, gra,
-  bla, pur, whi, whi, bla, whi, bla, gra,
-  bla, red, whi, whi, whi, whi, whi, gra,
-  bla, red, red, whi, whi, whi, whi, bla,
+  bla, red, red, red, whi, whi, gra, bla,
   red, red, pur, bro, ora, ora, bro, bla,
   red, pur, red, red, red, red, red, pur,
-  bla, bla, bla, blu, blu, blu, bla, bla
+  bla, bla, blu, blu, blu, blu, bla, bla
   ]
 
-sense.set_pixels(pet_stance1)
+sense.clear()
+for i in range(10):
+	sense.set_pixels(pet_stance1)
+	time.sleep(0.5)
+	sense.set_pixels(pet_stance2)
+	time.sleep(0.5)
